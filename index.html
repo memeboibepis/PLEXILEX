@@ -232,33 +232,6 @@
     </div>
 
 <!-- Scripts -->    
-
-    <script>
-    window.onload = () => {
-        const shortcuts = document.querySelectorAll('.shortcut');
-        const container = document.getElementById('shortcut-container');
-
-        // Get the grid container's width and height
-        const containerWidth = container.clientWidth;
-        const gap = 10; // Same gap as in the grid
-
-        // Calculate grid cell width
-        const cellWidth = 80 + gap; // shortcut width + gap
-
-        // Position each shortcut inside the grid manually
-        shortcuts.forEach((shortcut, index) => {
-            const col = index % Math.floor(containerWidth / cellWidth);
-            const row = Math.floor(index / Math.floor(containerWidth / cellWidth));
-
-            // Calculate x and y positions
-            const x = col * cellWidth;
-            const y = row * (85 + gap); // shortcut height + gap
-
-            shortcut.style.transform = `translate(${x}px, ${y}px)`; // Apply transform
-        });
-    };
-    </script>
-
 <script src="/js/tabs.js"></script>
 <script src="/js/time.js"></script>
 <script src="/js/shortcuts.js"></script>
