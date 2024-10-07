@@ -22,22 +22,22 @@
     </div>
     
     <!-- Shortcuts -->
-    <div id="shortcut-container">
-        <div class="shortcut" id="shortcutchrome"  draggable="true">
-            <div class="shortcut-img-container">
-                <img src="/images/pinned/chrome/chrome.png" alt="Chrome" class="main-img">
-                <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
-            </div>
-            <p class="shortcut-label">Google Chrome</p>
+   <div id="shortcut-container">
+    <div class="shortcut" id="shortcutchrome" draggable="true">
+        <div class="shortcut-img-container">
+            <img src="/images/pinned/chrome/chrome.png" alt="Chrome" class="main-img">
+            <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
         </div>
-        <div class="shortcut" id="shortcutgeometrydash"  draggable="true">
-            <div class="shortcut-img-container">
-                <img src="/images/pinned/geometrydash/geometrydash.png" alt="Geometry Dash" class="main-img">
-                <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
-            </div>
-            <p class="shortcut-label">Geometry Dash</p>
-        </div>
+        <p class="shortcut-label">Google Chrome</p>
     </div>
+    <div class="shortcut" id="shortcutgeometrydash" draggable="true">
+        <div class="shortcut-img-container">
+            <img src="/images/pinned/geometrydash/geometrydash.png" alt="Geometry Dash" class="main-img">
+            <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
+        </div>
+        <p class="shortcut-label">Geometry Dash</p>
+    </div>
+</div>
 
     <!-- Task Bar -->
     <div id="taskbar">
@@ -234,7 +234,10 @@
 <!-- Scripts -->    
 <script src="/js/tabs.js"></script>
 <script src="/js/time.js"></script>
-<script src="/js/shortcuts.js"></script>
+    
+<script src="/js/shortcuts/shortcuts.js"></script>
+<script src="/js/shortcuts/function.js"></script>
+    
 <script src="/js/highlight.js"></script>
 </body>
 </html>
