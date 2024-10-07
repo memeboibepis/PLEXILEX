@@ -1,113 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLEXILE 10</title>
     <link rel="icon" type="image/png" href="/images/plexile10.png">
-    <link rel="manifest" href="/manifest.json"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/time.css">
     <link rel="stylesheet" href="/css/shortcuts.css">
+
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        /* Loading Screen Styles */
+        .loading-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            position: absolute;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        .loading-image {
+            max-width: 70%;
+            height: auto;
+            margin-bottom: 20px; /* Space between the logo and loader */
+        }
+
+        .loader {
+            width: 50px; /* Size of loading gif */
+            height: 50px;
+        }
+
+        /* Login Screen Styles */
+        .login-screen {
+            display: none; /* Hidden by default */
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px); /* Blurred background */
+            position: relative;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-container h2 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .login-container button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background: #45a049;
+        }
+    </style>
 </head>
+
 <body>
-
-    <div class="fog-container">
-        <div class="fog"></div>
-        <div class="fog"></div>
-        <div class="fog"></div>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <img src="/images/plexile10.png" alt="PLEXILE 10" class="loading-image">
+        <img src="/images/loading.gif" alt="Loading..." class="loader"> <!-- Use your loading gif -->
     </div>
-    
-    <!-- Shortcuts -->
-   <div id="shortcut-container">
-    <div class="shortcut" id="shortcutchrome" draggable="true">
-        <div class="shortcut-img-container">
-            <img src="/images/pinned/chrome/chrome.png" alt="Chrome" class="main-img">
-            <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
+
+    <!-- Login Screen -->
+    <div class="login-screen" id="login-screen">
+        <div class="login-container">
+            <h2>Login to PLEXILE 10</h2>
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <button onclick="login()">Login</button>
         </div>
-        <p class="shortcut-label">Google Chrome</p>
     </div>
-    <div class="shortcut" id="shortcutgeometrydash" draggable="true">
-        <div class="shortcut-img-container">
-            <img src="/images/pinned/geometrydash/geometrydash.png" alt="Geometry Dash" class="main-img">
-            <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
-        </div>
-        <p class="shortcut-label">Geometry Dash</p>
-    </div>
-      <div class="shortcut" id="shortcutpvz" draggable="true">
-        <div class="shortcut-img-container">
-            <img src="/images/pinned/pvz/pvz.png" alt="Plants Vs Zombies" class="main-img">
-            <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
-        </div>
-        <p class="shortcut-label">Plants Vs Zombies</p>
-    </div>
-</div>
 
-    <!-- Task Bar -->
-    <div id="taskbar">
-        <div id="plexile-logo">
-            <img src="/images/plexile10.png" alt="PLEXILE 10">
+    <!-- Main Content (hidden until login) -->
+    <div id="main-content" style="display: none;">
+        <!-- Your main website content here -->
+        <div class="fog-container">
+            <div class="fog"></div>
+            <div class="fog"></div>
+            <div class="fog"></div>
         </div>
-
-        <div id="search-bar">
-            <i class='bx bx-search'></i>
-            <input type="text" placeholder="Type here to search">
-        </div>
-
-        <!-- Pinned Apps-->
-        <div id="chrome" class="icon-box">
-            <img src="/images/pinned/chrome/chrome.png" alt="Chrome">
-        </div>
-
-        <div id="files" class="icon-box">
-            <img src="/images/pinned/files/files.png" alt="Files">
-        </div>
-
-        <div id="settings" class="icon-box">
-            <img src="/images/pinned/settings/settings.png" alt="Settings">
+        
+        <!-- Shortcuts -->
+        <div id="shortcut-container">
+            <div class="shortcut" id="shortcutchrome" draggable="true">
+                <div class="shortcut-img-container">
+                    <img src="/images/pinned/chrome/chrome.png" alt="Chrome" class="main-img">
+                    <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
+                </div>
+                <p class="shortcut-label">Google Chrome</p>
+            </div>
+            <div class="shortcut" id="shortcutgeometrydash" draggable="true">
+                <div class="shortcut-img-container">
+                    <img src="/images/pinned/geometrydash/geometrydash.png" alt="Geometry Dash" class="main-img">
+                    <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
+                </div>
+                <p class="shortcut-label">Geometry Dash</p>
+            </div>
+            <div class="shortcut" id="shortcutpvz" draggable="true">
+                <div class="shortcut-img-container">
+                    <img src="/images/pinned/pvz/pvz.png" alt="Plants Vs Zombies" class="main-img">
+                    <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
+                </div>
+                <p class="shortcut-label">Plants Vs Zombies</p>
+            </div>
         </div>
 
-        <div id="pvz" class="icon-box">
-            <img src="/images/pinned/pvz/pvz.png" alt="Plants Vs Zombies">
-        </div>
+        <!-- Task Bar -->
+        <div id="taskbar">
+            <div id="plexile-logo">
+                <img src="/images/plexile10.png" alt="PLEXILE 10">
+            </div>
+            <div id="search-bar">
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Type here to search">
+            </div>
 
-        <div id="doom" class="icon-box">
-            <img src="/images/pinned/doom/doom.png" alt="Doom">
-        </div>
+            <!-- Pinned Apps-->
+            <div id="chrome" class="icon-box">
+                <img src="/images/pinned/chrome/chrome.png" alt="Chrome">
+            </div>
+            <div id="files" class="icon-box">
+                <img src="/images/pinned/files/files.png" alt="Files">
+            </div>
+            <div id="settings" class="icon-box">
+                <img src="/images/pinned/settings/settings.png" alt="Settings">
+            </div>
+            <div id="pvz" class="icon-box">
+                <img src="/images/pinned/pvz/pvz.png" alt="Plants Vs Zombies">
+            </div>
+            <div id="doom" class="icon-box">
+                <img src="/images/pinned/doom/doom.png" alt="Doom">
+            </div>
+            <div id="fnaf" class="icon-box">
+                <img src="/images/pinned/fnaf/fnaf.png" alt="FNAF">
+            </div>
+            <div id="fnaf2" class="icon-box">
+                <img src="/images/pinned/fnaf2/fnaf2.png" alt="FNAF 2">
+            </div>
+            <div id="geometrydash" class="icon-box">
+                <img src="/images/pinned/geometrydash/geometrydash.png" alt="Geometry Dash">
+            </div>
+            <div id="discord" class="icon-box">
+                <img src="/images/pinned/discord/discord.png" alt="Discord">
+            </div>
+            <div id="roblox" class="icon-box">
+                <img src="/images/pinned/roblox/roblox.png" alt="Roblox">
+            </div>
 
-        <div id="fnaf" class="icon-box">
-            <img src="/images/pinned/fnaf/fnaf.png" alt="FNAF">
-        </div>
-
-        <div id="fnaf2" class="icon-box">
-            <img src="/images/pinned/fnaf2/fnaf2.png" alt="FNAF 2">
-        </div>
-
-        <div id="geometrydash" class="icon-box">
-            <img src="/images/pinned/geometrydash/geometrydash.png" alt="Geometry Dash">
-        </div>
-
-        <div id="discord" class="icon-box">
-            <img src="/images/pinned/discord/discord.png" alt="Discord">
-        </div>
-
-        <div id="roblox" class="icon-box">
-            <img src="/images/pinned/roblox/roblox.png" alt="Roblox">
-        </div>
-
-    <!-- (Taskbar (Time n Menu)) -->
-    <div id="taskbar-right">
-    
-    <div id="clock">
-        <span id="time"></span>
-        <span id="date"></span>
-    </div>
-    
-    <img src="/images/taskbar/notification.png" alt="Notifications" class="icon" id="notification-icon">
-</div>
+            <!-- (Taskbar (Time n Menu)) -->
+            <div id="taskbar-right">
+                <div id="clock">
+                    <span id="time"></span>
+                    <span id="date"></span>
+                </div>
+                <img src="/images/taskbar/notification.png" alt="Notifications" class="icon" id="notification-icon">
+            </div>
     
     <!-- Tabs -->
     <div id="chrome-tab" class="tab-box">
@@ -241,6 +326,40 @@
     </div>
 
 <!-- Scripts -->    
+
+ <script>
+        // Simulate loading for 3 seconds
+        setTimeout(() => {
+            document.getElementById("loading-screen").style.display = "none"; // Hide loading screen
+            document.getElementById("login-screen").style.display = "flex"; // Show login screen
+        }, 3000); // Change this value to adjust loading time
+
+        // Login function
+        function login() {
+            // Simulating login validation (replace with actual validation logic)
+            const username = document.querySelector('input[type="text"]').value;
+            const password = document.querySelector('input[type="password"]').value;
+
+            if (username && password) {
+                // Hide login screen and show main content
+                document.getElementById("login-screen").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+            } else {
+                alert("Please enter both username and password!");
+            }
+        }
+
+        // Update time and date
+        function updateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById("time").textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById("date").textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        setInterval(updateTime, 1000); // Update every second
+        updateTime(); // Initial call
+    </script>
 <script src="/js/tabs.js"></script>
 <script src="/js/time.js"></script>
     
