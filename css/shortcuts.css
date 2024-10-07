@@ -63,11 +63,15 @@
 
 @media (max-width: 600px) {
     #shortcut-container {
-        grid-template-columns: repeat(2, 1fr); 
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .shortcut {
+        width: 100%; 
     }
 
     .shortcut-label {
-        max-width: 50px;
+        max-width: 70px;
     }
 }
 
