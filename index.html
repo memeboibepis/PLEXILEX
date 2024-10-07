@@ -10,93 +10,14 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/time.css">
     <link rel="stylesheet" href="/css/shortcuts.css">
-
-    <style>
-        /* General Styles */
-        body {
-            margin: 0;
-            overflow: hidden; /* Prevent scrolling */
-        }
-
-        /* Loading Screen Styles */
-        .loading-screen {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #000;
-            position: absolute;
-            width: 100%;
-            z-index: 9999;
-        }
-
-        .loading-image {
-            max-width: 70%;
-            height: auto;
-            margin-bottom: 20px; /* Space between the logo and loader */
-        }
-
-        .loader {
-            width: 50px; /* Size of loading gif */
-            height: 50px;
-        }
-
-        /* Login Screen Styles */
-        .login-screen {
-            display: none; /* Hidden by default */
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px); /* Blurred background */
-            position: relative;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .login-container {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            width: 300px;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        }
-
-        .login-container h2 {
-            color: #fff;
-            margin-bottom: 15px;
-        }
-
-        .login-container input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-        }
-
-        .login-container button {
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-
-        .login-container button:hover {
-            background: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/loading.css">
 </head>
-
 <body>
+    
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
         <img src="/images/plexile10.png" alt="PLEXILE 10" class="loading-image">
-        <img src="/images/loading.gif" alt="Loading..." class="loader"> <!-- Use your loading gif -->
+        <img src="/images/loading.gif" alt="Loading..." class="loader"> 
     </div>
 
     <!-- Login Screen -->
@@ -109,9 +30,7 @@
         </div>
     </div>
 
-    <!-- Main Content (hidden until login) -->
     <div id="main-content" style="display: none;">
-        <!-- Your main website content here -->
         <div class="fog-container">
             <div class="fog"></div>
             <div class="fog"></div>
@@ -326,41 +245,8 @@
     </div>
 
 <!-- Scripts -->    
-
- <script>
-        // Simulate loading for 3 seconds
-        setTimeout(() => {
-            document.getElementById("loading-screen").style.display = "none"; // Hide loading screen
-            document.getElementById("login-screen").style.display = "flex"; // Show login screen
-        }, 3000); // Change this value to adjust loading time
-
-        // Login function
-        function login() {
-            // Simulating login validation (replace with actual validation logic)
-            const username = document.querySelector('input[type="text"]').value;
-            const password = document.querySelector('input[type="password"]').value;
-
-            if (username && password) {
-                // Hide login screen and show main content
-                document.getElementById("login-screen").style.display = "none";
-                document.getElementById("main-content").style.display = "block";
-            } else {
-                alert("Please enter both username and password!");
-            }
-        }
-
-        // Update time and date
-        function updateTime() {
-            const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById("time").textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            document.getElementById("date").textContent = now.toLocaleDateString('en-US', options);
-        }
-
-        setInterval(updateTime, 1000); // Update every second
-        updateTime(); // Initial call
-    </script>
 <script src="/js/tabs.js"></script>
+<script src="/js/loading.js"></script>
 <script src="/js/time.js"></script>
     
 <script src="/js/shortcuts/shortcuts.js"></script>
