@@ -18,12 +18,12 @@
         .loading-image {
             width: 120px;
             height: 120px;
-            margin-bottom: 100px;
+            margin-bottom: 140px;
         }
 
         .loader {
-            width: 50px; 
-            height: 50px;
+            width: 40px; 
+            height: 40px;
         }
 
         .login-screen {
