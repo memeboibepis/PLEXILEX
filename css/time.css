@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     color: #fff;
-    bottom: 4px;
+    bottom: 5px;
     position: absolute;
     right: 30px;
     font-family: 'Roboto', sans-serif;
@@ -10,6 +10,7 @@
 
 #clock {
     text-align: center;
+    margin: 0 10px; 
 }
 
 #clock #time {
@@ -21,4 +22,10 @@
     display: block;
     font-size: 12px; 
     margin-top: 2px;
+}
+
+.icon {
+    width: 20px;
+    height: auto; 
+    margin: 0 5px; 
 }
