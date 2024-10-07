@@ -1,0 +1,13 @@
+{
+  "name": "PLEXILE 10",
+  "short_name": "P10",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/images/plexile10.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

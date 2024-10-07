@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLEXILE 10</title>
+    <link rel="icon" type="image/png" href="/images/plexile10.png">
+    <link rel="manifest" href="/manifest.json"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/time.css">
+    <link rel="stylesheet" href="/css/shortcuts.css">
+</head>
+<body>
+
+    <div class="fog-container">
+        <div class="fog"></div>
+        <div class="fog"></div>
+        <div class="fog"></div>
+    </div>
+    
+    <!-- Shortcuts -->
+    <div id="shortcut-container">
+        <div class="shortcut" id="shortcutchrome"  draggable="true">
+            <div class="shortcut-img-container">
+                <img src="/images/pinned/chrome/chrome.png" alt="Chrome" class="main-img">
+                <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
+            </div>
+            <p class="shortcut-label">Google Chrome</p>
+        </div>
+        <div class="shortcut" id="shortcutgeometrydash"  draggable="true">
+            <div class="shortcut-img-container">
+                <img src="/images/pinned/geometrydash/geometrydash.png" alt="Geometry Dash" class="main-img">
+                <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
+            </div>
+            <p class="shortcut-label">Geometry Dash</p>
+        </div>
+    </div>
+
+    <!-- Task Bar -->
+    <div id="taskbar">
+        <div id="plexile-logo">
+            <img src="/images/plexile10.png" alt="PLEXILE 10">
+        </div>
+
+        <div id="search-bar">
+            <i class='bx bx-search'></i>
+            <input type="text" placeholder="Type here to search">
+        </div>
+
+        <!-- Pinned Apps-->
+        <div id="chrome" class="icon-box">
+            <img src="/images/pinned/chrome/chrome.png" alt="Chrome">
+        </div>
+
+        <div id="files" class="icon-box">
+            <img src="/images/pinned/files/files.png" alt="Files">
+        </div>
+
+        <div id="settings" class="icon-box">
+            <img src="/images/pinned/settings/settings.png" alt="Settings">
+        </div>
+
+        <div id="pvz" class="icon-box">
+            <img src="/images/pinned/pvz/pvz.png" alt="Plants Vs Zombies">
+        </div>
+
+        <div id="doom" class="icon-box">
+            <img src="/images/pinned/doom/doom.png" alt="Doom">
+        </div>
+
+        <div id="fnaf" class="icon-box">
+            <img src="/images/pinned/fnaf/fnaf.png" alt="FNAF">
+        </div>
+
+        <div id="fnaf2" class="icon-box">
+            <img src="/images/pinned/fnaf2/fnaf2.png" alt="FNAF 2">
+        </div>
+
+        <div id="geometrydash" class="icon-box">
+            <img src="/images/pinned/geometrydash/geometrydash.png" alt="Geometry Dash">
+        </div>
+
+        <div id="discord" class="icon-box">
+            <img src="/images/pinned/discord/discord.png" alt="Discord">
+        </div>
+
+        <div id="roblox" class="icon-box">
+            <img src="/images/pinned/roblox/roblox.png" alt="Roblox">
+        </div>
+
+        <!-- Taskbar (Time & Date) -->
+        <div id="taskbar-right">
+            <div id="clock">
+                <span id="time"></span>
+                <span id="date"></span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tabs -->
+    <div id="chrome-tab" class="tab-box">
+        <div class="tab-box-header">
+            <img src="/images/pinned/chrome/chrome.png" alt="Chrome">
+            <h3>Google Chrome</h3>
+            <div class="controls">
+                <i class='bx bx-minus' onclick="minimizeTab('chrome-tab'); event.stopPropagation();"></i>
+                <i class='bx bx-square' onclick="maximizeTab('chrome-tab'); event.stopPropagation();"></i>
+                <i class='fas fa-times' onclick="closeTab('chrome-tab'); event.stopPropagation();"></i>
+            </div>
+        </div>
+        <iframe src="/placeholder.html"></iframe>
+    </div>
+
+    <div id="files-tab" class="tab-box">
+        <div class="tab-box-header">
+            <img src="/images/pinned/files/files.png" alt="Files">
+            <h3>Files</h3>
+            <div class="controls">
+                <i class='bx bx-minus' onclick="minimizeTab('files-tab'); event.stopPropagation();"></i>
+                <i class='bx bx-square' onclick="maximizeTab('files-tab'); event.stopPropagation();"></i>
+                <i class='fas fa-times' onclick="closeTab('files-tab'); event.stopPropagation();"></i>
+            </div>
+        </div>
+        <iframe src="/placeholder.html"></iframe>
+    </div>
+    
+    <div id="settings-tab" class="tab-box">
+        <div class="tab-box-header">
+            <img src="/images/pinned/settings/settings.png" alt="Settings">
+            <h3>Settings</h3>
+            <div class="controls">
+                <i class='bx bx-minus' onclick="minimizeTab('settings-tab'); event.stopPropagation();"></i>
+                <i class='bx bx-square' onclick="maximizeTab('settings-tab'); event.stopPropagation();"></i>
+                <i class='fas fa-times' onclick="closeTab('settings-tab'); event.stopPropagation();"></i>
+            </div>
+        </div>
+        <iframe src="/placeholder.html"></iframe>
+    </div>
+
+    <div id="pvz-tab" class="tab-box">
+        <div class="tab-box-header">
+            <img src="/images/pinned/pvz/pvz.png" alt="Plants Vs Zombies">
+            <h3>Plants Vs Zombies</h3>
+            <div class="controls">
+                <i class='bx bx-minus' onclick="minimizeTab('pvz-tab'); event.stopPropagation();"></i>
+                <i class='bx bx-square' onclick="maximizeTab('pvz-tab'); event.stopPropagation();"></i>
+                <i class='fas fa-times' onclick="closeTab('pvz-tab'); event.stopPropagation();"></i>
+            </div>
+        </div>
+        <iframe src="/games/pvz/index.html"></iframe>
+    </div>
+    
+    <div id="doom-tab" class="tab-box">
+        <div class="tab-box-header">
+            <img src="/images/pinned/doom/doom.png" alt="Doom">
+            <h3>Doom</h3>
+            <div class="controls">
+                <i class='bx bx-minus' onclick="minimizeTab('doom-tab'); event.stopPropagation();"></i>
+                <i class='bx bx-square' onclick="maximizeTab('doom-tab'); event.stopPropagation();"></i>
+                <i class='fas fa-times' onclick="closeTab('doom-tab'); event.stopPropagation();"></i>
+            </div>
+        </div>
+        <iframe src="/games/doom/index.html"></iframe>
+    </div>
+
+    <div id="fnaf-tab" class="tab-box">
+        <div class="tab-box-header">
+            <img src="/images/pinned/fnaf/fnaf.png" alt="FNAF">
+            <h3>FNAF</h3>
+            <div class="controls">
+                <i class='bx bx-minus' onclick="minimizeTab('fnaf-tab'); event.stopPropagation();"></i>
+                <i class='bx bx-square' onclick="maximizeTab('fnaf-tab'); event.stopPropagation();"></i>
+                <i class='fas fa-times' onclick="closeTab('fnaf-tab'); event.stopPropagation();"></i>
+            </div>
+        </div>
+        <iframe src="/placeholder.html"></iframe>
+    </div>
+
+    <div id="fnaf2-tab" class="tab-box">
+        <div class="tab-box-header">
+            <img src="/images/pinned/fnaf2/fnaf2.png" alt="FNAF 2">
+            <h3>FNAF 2</h3>
+            <div class="controls">
+                <i class='bx bx-minus' onclick="minimizeTab('fnaf2-tab'); event.stopPropagation();"></i>
+                <i class='bx bx-square' onclick="maximizeTab('fnaf2-tab'); event.stopPropagation();"></i>
+                <i class='fas fa-times' onclick="closeTab('fnaf2-tab'); event.stopPropagation();"></i>
+            </div>
+        </div>
+        <iframe src="/placeholder.html"></iframe>
+    </div>
+
+    <div id="geometrydash-tab" class="tab-box">
+        <div class="tab-box-header">
+            <img src="/images/pinned/geometrydash/geometrydash.png" alt="Geometry Dash">
+            <h3>Geometry Dash</h3>
+            <div class="controls">
+                <i class='bx bx-minus' onclick="minimizeTab('geometrydash-tab'); event.stopPropagation();"></i>
+                <i class='bx bx-square' onclick="maximizeTab('geometrydash-tab'); event.stopPropagation();"></i>
+                <i class='fas fa-times' onclick="closeTab('geometrydash-tab'); event.stopPropagation();"></i>
+            </div>
+        </div>
+        <iframe src="/placeholder.html"></iframe>
+    </div>
+
+    <div id="discord-tab" class="tab-box">
+        <div class="tab-box-header">
+            <img src="/images/pinned/discord/discord.png" alt="Discord">
+            <h3>Discord</h3>
+            <div class="controls">
+                <i class='bx bx-minus' onclick="minimizeTab('discord-tab'); event.stopPropagation();"></i>
+                <i class='bx bx-square' onclick="maximizeTab('discord-tab'); event.stopPropagation();"></i>
+                <i class='fas fa-times' onclick="closeTab('discord-tab'); event.stopPropagation();"></i>
+            </div>
+        </div>
+        <iframe src="/placeholder.html"></iframe>
+    </div>
+
+    <div id="roblox-tab" class="tab-box">
+        <div class="tab-box-header">
+            <img src="/images/pinned/roblox/roblox.png" alt="Roblox">
+            <h3>Roblox</h3>
+            <div class="controls">
+                <i class='bx bx-minus' onclick="minimizeTab('roblox-tab'); event.stopPropagation();"></i>
+                <i class='bx bx-square' onclick="maximizeTab('roblox-tab'); event.stopPropagation();"></i>
+                <i class='fas fa-times' onclick="closeTab('roblox-tab'); event.stopPropagation();"></i>
+            </div>
+        </div>
+        <iframe src="/placeholder.html"></iframe>
+    </div>
+
+<!-- Scripts -->    
+
+    <script>
+    window.onload = () => {
+        const shortcuts = document.querySelectorAll('.shortcut');
+        const container = document.getElementById('shortcut-container');
+
+        // Get the grid container's width and height
+        const containerWidth = container.clientWidth;
+        const gap = 10; // Same gap as in the grid
+
+        // Calculate grid cell width
+        const cellWidth = 80 + gap; // shortcut width + gap
+
+        // Position each shortcut inside the grid manually
+        shortcuts.forEach((shortcut, index) => {
+            const col = index % Math.floor(containerWidth / cellWidth);
+            const row = Math.floor(index / Math.floor(containerWidth / cellWidth));
+
+            // Calculate x and y positions
+            const x = col * cellWidth;
+            const y = row * (85 + gap); // shortcut height + gap
+
+            shortcut.style.transform = `translate(${x}px, ${y}px)`; // Apply transform
+        });
+    };
+    </script>
+
+<script src="/js/tabs.js"></script>
+<script src="/js/time.js"></script>
+<script src="/js/shortcuts.js"></script>
+<script src="/js/highlight.js"></script>
+</body>
+</html>

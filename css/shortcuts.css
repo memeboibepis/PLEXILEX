@@ -1,0 +1,78 @@
+#shortcut-container {
+    position: relative;
+    width: 100vw; 
+    height: 100vh; 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0px;
+    padding: 10px; 
+}
+
+.shortcut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    height: 85px; 
+    width: 80px;
+    padding: 1px; 
+    border-radius: 2px;
+    transition: transform 0.2s ease, background-color 0.2s ease, border 0.2s ease;
+    border: 1px solid transparent;
+    z-index: 1; 
+}
+
+.shortcut .shortcut-img-container {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.shortcut .main-img {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: -14px; 
+    left: 5px;
+    transition: transform 0.2s ease;
+}
+
+.shortcut .shortcut-icon {
+    position: absolute;
+    bottom: -14px;
+    left: 5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+}
+
+.shortcut-label {
+    margin-bottom: 3px; 
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    max-width: 70px;
+    word-wrap: break-word;
+    line-height: 1.2em;
+}
+
+.shortcut:hover {
+    background-color: rgba(201, 49, 49, 0.3);
+    border: 1px solid #C93131;
+}
+
+@media (max-width: 600px) {
+    .shortcut-label {
+        max-width: 50px;
+    }
+}
+
+.shortcut.dragging {
+    opacity: 0.5; 
+    transform: scale(1.05);
+    z-index: 2; 
+}
+
+.shortcut:active {
+    cursor: grabbing; 
+}
