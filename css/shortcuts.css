@@ -32,14 +32,14 @@
     width: 40px;
     height: 40px;
     position: absolute;
-    bottom: -14px; 
+    bottom: -12px; 
     left: 5px;
     transition: transform 0.2s ease;
 }
 
 .shortcut .shortcut-icon {
     position: absolute;
-    bottom: -14px;
+    bottom: -12px;
     left: 5px;
     width: 15px;
     height: 15px;
@@ -47,7 +47,7 @@
 }
 
 .shortcut-label {
-    margin-bottom: 1px; 
+    margin-bottom: 3px; 
     font-size: 14px;
     color: #fff;
     text-align: center;
