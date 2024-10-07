@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLEXILE 10</title>
+    <link rel="icon" type="image/png" href="/images/plexile10.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/time.css">
+    <link rel="stylesheet" href="/css/shortcuts.css">
+</head>
+
+<body>
+
+    <div class="fog-container">
+        <div class="fog"></div>
+        <div class="fog"></div>
+        <div class="fog"></div>
+    </div>
+
+    <!-- Shortcuts -->
+    <div id="shortcut-container">
+        <div class="shortcut" id="shortcutchrome" draggable="true">
+            <div class="shortcut-img-container">
+                <img src="/images/pinned/chrome/chrome.png" alt="Chrome" class="main-img">
+                <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
+            </div>
+            <p class="shortcut-label">Google Chrome</p>
+        </div>
+        <div class="shortcut" id="shortcutgeometrydash" draggable="true">
+            <div class="shortcut-img-container">
+                <img src="/images/pinned/geometrydash/geometrydash.png" alt="Geometry Dash" class="main-img">
+                <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
+            </div>
+            <p class="shortcut-label">Geometry Dash</p>
+        </div>
+        <div class="shortcut" id="shortcutpvz" draggable="true">
+            <div class="shortcut-img-container">
+                <img src="/images/pinned/pvz/pvz.png" alt="Plants Vs Zombies" class="main-img">
+                <img src="/images/shortcut.png" alt="Shortcut" class="shortcut-icon">
+            </div>
+            <p class="shortcut-label">Plants Vs Zombies</p>
+        </div>
+    </div>
+
+    <div class="selection-box" id="selectionBox"></div>
+
+    <!-- Task Bar -->
+    <div id="taskbar">
+        <div id="plexile-logo">
+            <img src="/images/plexile10.png" alt="PLEXILE 10">
+        </div>
+        <div id="search-bar">
+            <i class='bx bx-search'></i>
+            <input type="text" placeholder="Type here to search">
+        </div>
+
+        <!-- Pinned Apps -->
+        <div id="chrome" class="icon-box">
+            <img src="/images/pinned/chrome/chrome.png" alt="Chrome">
+        </div>
+        <div id="files" class="icon-box">
+            <img src="/images/pinned/files/files.png" alt="Files">
+        </div>
+        <div id="settings" class="icon-box">
+            <img src="/images/pinned/settings/settings.png" alt="Settings">
+        </div>
+        <div id="pvz" class="icon-box">
+            <img src="/images/pinned/pvz/pvz.png" alt="Plants Vs Zombies">
+        </div>
+        <div id="doom" class="icon-box">
+            <img src="/images/pinned/doom/doom.png" alt="Doom">
+        </div>
+        <div id="fnaf" class="icon-box">
+            <img src="/images/pinned/fnaf/fnaf.png" alt="FNAF">
+        </div>
+        <div id="fnaf2" class="icon-box">
+            <img src="/images/pinned/fnaf2/fnaf2.png" alt="FNAF 2">
+        </div>
+        <div id="geometrydash" class="icon-box">
+            <img src="/images/pinned/geometrydash/geometrydash.png" alt="Geometry Dash">
+        </div>
+        <div id="discord" class="icon-box">
+            <img src="/images/pinned/discord/discord.png" alt="Discord">
+        </div>
+        <div id="roblox" class="icon-box">
+            <img src="/images/pinned/roblox/roblox.png" alt="Roblox">
+        </div>
+
+        <!-- Taskbar Right Side -->
+        <div id="taskbar-right">
+            <div id="clock">
+                <span id="time"></span>
+                <span id="date"></span>
+            </div>
+            <img src="/images/taskbar/notification.png" alt="Notifications" class="icon" id="notification-icon">
+        </div>
+
+        <!-- Tabs -->
+        <div id="chrome-tab" class="tab-box">
+            <div class="tab-box-header">
+                <img src="/images/pinned/chrome/chrome.png" alt="Chrome">
+                <h3>Google Chrome</h3>
+                <div class="controls">
+                    <i class='bx bx-minus'></i>
+                    <i class='bx bx-square'></i>
+                    <i class='fas fa-times'></i>
+                </div>
+            </div>
+            <iframe src="/placeholder.html"></iframe>
+        </div>
+
+        <div id="files-tab" class="tab-box">
+            <div class="tab-box-header">
+                <img src="/images/pinned/files/files.png" alt="Files">
+                <h3>Files</h3>
+                <div class="controls">
+                    <i class='bx bx-minus'></i>
+                    <i class='bx bx-square'></i>
+                    <i class='fas fa-times'></i>
+                </div>
+            </div>
+            <iframe src="/placeholder.html"></iframe>
+        </div>
+
+        <div id="settings-tab" class="tab-box">
+            <div class="tab-box-header">
+                <img src="/images/pinned/settings/settings.png" alt="Settings">
+                <h3>Settings</h3>
+                <div class="controls">
+                    <i class='bx bx-minus'></i>
+                    <i class='bx bx-square'></i>
+                    <i class='fas fa-times'></i>
+                </div>
+            </div>
+            <iframe src="/placeholder.html"></iframe>
+        </div>
+
+        <div id="pvz-tab" class="tab-box">
+            <div class="tab-box-header">
+                <img src="/images/pinned/pvz/pvz.png" alt="Plants Vs Zombies">
+                <h3>Plants Vs Zombies</h3>
+                <div class="controls">
+                    <i class='bx bx-minus'></i>
+                    <i class='bx bx-square'></i>
+                    <i class='fas fa-times'></i>
+                </div>
+            </div>
+            <iframe src="/games/pvz/index.html"></iframe>
+        </div>
+
+        <div id="doom-tab" class="tab-box">
+            <div class="tab-box-header">
+                <img src="/images/pinned/doom/doom.png" alt="Doom">
+                <h3>Doom</h3>
+                <div class="controls">
+                    <i class='bx bx-minus'></i>
+                    <i class='bx bx-square'></i>
+                    <i class='fas fa-times'></i>
+                </div>
+            </div>
+            <iframe src="/games/doom/index.html"></iframe>
+        </div>
+
+        <div id="fnaf-tab" class="tab-box">
+            <div class="tab-box-header">
+                <img src="/images/pinned/fnaf/fnaf.png" alt="FNAF">
+                <h3>FNAF</h3>
+                <div class="controls">
+                    <i class='bx bx-minus'></i>
+                    <i class='bx bx-square'></i>
+                    <i class='fas fa-times'></i>
+                </div>
+            </div>
+            <iframe src="/games/fnaf/index.html"></iframe>
+        </div>
+
+        <div id="fnaf2-tab" class="tab-box">
+            <div class="tab-box-header">
+                <img src="/images/pinned/fnaf2/fnaf2.png" alt="FNAF 2">
+                <h3>FNAF 2</h3>
+                <div class="controls">
+                    <i class='bx bx-minus'></i>
+                    <i class='bx bx-square'></i>
+                    <i class='fas fa-times'></i>
+                </div>
+            </div>
+            <iframe src="/games/fnaf2/index.html"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const tabs = {
+            chrome: document.getElementById('chrome-tab'),
+            files: document.getElementById('files-tab'),
+            settings: document.getElementById('settings-tab'),
+            pvz: document.getElementById('pvz-tab'),
+            doom: document.getElementById('doom-tab'),
+            fnaf: document.getElementById('fnaf-tab'),
+            fnaf2: document.getElementById('fnaf2-tab'),
+            geometrydash: document.getElementById('geometrydash-tab'),
+            discord: document.getElementById('discord-tab'),
+            roblox: document.getElementById('roblox-tab'),
+        };
+
+        const shortcuts = document.querySelectorAll('.shortcut');
+        const selectionBox = document.getElementById('selectionBox');
+
+        shortcuts.forEach(shortcut => {
+            shortcut.addEventListener('dragstart', dragStart);
+            shortcut.addEventListener('dragend', dragEnd);
+        });
+
+        function dragStart(e) {
+            e.dataTransfer.setData('text/plain', this.id);
+            selectionBox.style.display = 'block';
+            selectionBox.style.width = `${this.offsetWidth}px`;
+            selectionBox.style.height = `${this.offsetHeight}px`;
+            selectionBox.style.left = `${this.getBoundingClientRect().left}px`;
+            selectionBox.style.top = `${this.getBoundingClientRect().top}px`;
+            setTimeout(() => {
+                this.style.display = 'none';
+            }, 0);
+        }
+
+        function dragEnd() {
+            selectionBox.style.display = 'none';
+            this.style.display = 'block';
+        }
+
+        document.getElementById('taskbar').addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        document.getElementById('taskbar').addEventListener('drop', (e) => {
+            e.preventDefault();
+            const id = e.dataTransfer.getData('text/plain');
+            const shortcut = document.getElementById(id);
+            shortcut.style.display = 'block';
+            const newTab = createTab(shortcut.id);
+            document.body.appendChild(newTab);
+            newTab.classList.add('tab-active'); // Makes the tab active
+        });
+
+        function createTab(id) {
+            const tab = document.createElement('div');
+            tab.classList.add('tab-box');
+            const header = document.createElement('div');
+            header.classList.add('tab-box-header');
+            header.innerHTML = `
+                <img src="/images/pinned/${id}/${id}.png" alt="${id}">
+                <h3>${id.charAt(0).toUpperCase() + id.slice(1)}</h3>
+                <div class="controls">
+                    <i class='bx bx-minus' onclick="minimizeTab(this)"></i>
+                    <i class='bx bx-square' onclick="maximizeTab(this)"></i>
+                    <i class='fas fa-times' onclick="closeTab(this)"></i>
+                </div>
+            `;
+            const iframe = document.createElement('iframe');
+            iframe.src = `/games/${id}/index.html`; // Adjust src based on the app
+            tab.appendChild(header);
+            tab.appendChild(iframe);
+            return tab;
+        }
+
+        function closeTab(element) {
+            const tab = element.closest('.tab-box');
+            tab.remove();
+        }
+
+        function minimizeTab(element) {
+            const tab = element.closest('.tab-box');
+            tab.querySelector('iframe').style.display = 'none';
+        }
+
+        function maximizeTab(element) {
+            const tab = element.closest('.tab-box');
+            const iframe = tab.querySelector('iframe');
+            iframe.style.display = 'block';
+            iframe.style.height = '100%'; // You can adjust the size based on your design
+        }
+
+        // Clock and Date
+        function updateTime() {
+            const now = new Date();
+            const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const date = now.toLocaleDateString();
+            document.getElementById('time').textContent = time;
+            document.getElementById('date').textContent = date;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+
+    </script>
+</body>
+
+</html>
