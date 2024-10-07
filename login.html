@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLEXILE 10</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"> 
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <div class="datetime" id="datetime">
+        <div id="time">00:00</div>
+        <div id="date">October 6, 2024</div>
+    </div>
+
+    <div class="login-container" id="loginContainer">
+        <img src="/images/user.png" alt="User" class="user-image"> 
+        <div class="guest-text">Guest</div>
+        <div class="search-container">
+            <input type="password" class="search-input" placeholder="Password" id="passwordInput">
+            <button class="search-button" id="loginButton">
+                <i class='bx bx-right-arrow-alt'></i> 
+            </button>
+        </div>
+        <div class="password-hint">Password is <b>Guest</b></div> 
+    </div>
+  
+    <div class="power-off">
+        <img src="/images/taskbar/poweroff.png" alt="Power Off"> 
+    </div>
+
+<script>
+    function updateTime() {
+        const now = new Date();
+        document.getElementById('time').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+        document.getElementById('date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    document.body.addEventListener('click', () => {
+        const loginContainer = document.getElementById('loginContainer');
+        const datetime = document.getElementById('datetime');
+        loginContainer.classList.add('active');
+        datetime.style.display = 'none';
+    });
+
+    document.getElementById('loginButton').addEventListener('click', () => {
+        const passwordInput = document.getElementById('passwordInput').value;
+        const correctPassword = 'Guest'; 
+
+        if (passwordInput === correctPassword) {
+            
+            window.location.href = '/main.html';
+        } else {
+            alert('Incorrect password. Please try again.');
+        }
+    });
+</script>
+</body>
+</html>
