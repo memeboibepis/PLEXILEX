@@ -64,7 +64,7 @@ function saveShortcutsOrder() {
             top: shortcut.style.top
         };
     });
-    localStorage.setItem('shortcutOrder', JSON.stringify(shortcuts)); // Save positions
+    localStorage.setItem('shortcutOrder', JSON.stringify(shortcuts)); 
 }
 
 function loadShortcutsOrder() {
@@ -73,7 +73,7 @@ function loadShortcutsOrder() {
         savedShortcuts.forEach(data => {
             const shortcut = document.getElementById(data.id);
             if (shortcut) {
-                // Apply saved positions
+                
                 shortcut.style.position = 'absolute';
                 shortcut.style.left = data.left;
                 shortcut.style.top = data.top;
