@@ -19,8 +19,18 @@ document.querySelectorAll('.icon-box').forEach(icon => {
 });
 
 function openTab(tab) {
+    
+    closeAllTabs();
+    
     tabs[tab].classList.add('open'); 
     document.getElementById(tab).classList.add('active-tab');
+}
+
+function closeAllTabs() {
+    for (const key in tabs) {
+        tabs[key].classList.remove('open');
+        document.getElementById(key).classList.remove('active-tab'); 
+    }
 }
 
 function closeTab(tab) {
