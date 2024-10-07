@@ -19,11 +19,6 @@ document.querySelectorAll('.icon-box').forEach(icon => {
 });
 
 function openTab(tab) {
-   
-    Object.keys(tabs).forEach((key) => {
-        closeTab(key);
-    });
-
     tabs[tab].classList.add('open'); 
     document.getElementById(tab).classList.add('active-tab');
 }
