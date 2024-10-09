@@ -4,7 +4,7 @@
   </kbd>
 </p>
 
-<p align="center"><strong>An unblocked recreation of Windows 10 with built-in games and a secure proxy for browsing.</strong></p>
+<p align="center">An unblocked recreation of <strong>Windows 10</strong> with built-in games and a secure proxy for browsing.</p>
 
 ---
 
