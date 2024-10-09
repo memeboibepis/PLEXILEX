@@ -1,146 +1,131 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Segoe UI', sans-serif;
-    background-image: url('/images/bg.png');
-    background-size: cover;
-    overflow: hidden;
-    position: relative;
-}
+   body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', sans-serif;
+            background-image: url('/images/bg.png');
+            background-size: cover;
+            overflow: hidden; 
+            position: relative; 
+        }
 
-.background-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0); 
-    z-index: 8; 
-    transition: background-color 0.5s ease;
-}
+        .datetime {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            font-size: 60px; 
+            z-index: 10;
+        }
 
-.background-overlay.active {
-    background-color: rgba(0, 0, 0, 0.4); 
-}
+        #time {
+            font-size: 63px;
+        }
 
-.datetime {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    color: white;
-    font-size: 60px;
-    z-index: 10;
-}
+        #date {
+            font-size: 43px; 
+        }
 
-#time {
-    font-size: 63px;
-}
+        .login-container {
+            position: absolute;
+            top: 100%; 
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: top 0.5s ease;
+            z-index: 9;
+        }
 
-#date {
-    font-size: 43px;
-}
+        .login-container.active {
+            top: 0;
+        }
 
-.login-container {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background: rgba(255, 255, 255, 0);
-    backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: top 0.5s ease;
-    z-index: 9;
-}
+        .user-image {
+            width: 155px; 
+            height: 155px;
+            border-radius: 50%; 
+            margin-bottom: 5px;
+            opacity: 0.8; 
+        }
 
-.login-container.active {
-    top: 0;
-}
+        .guest-text {
+            font-size: 42px; 
+            font-weight: 100;
+            margin-bottom: 90px;
+            color: white; 
+        }
 
-.user-image {
-    width: 155px;
-    height: 155px;
-    border-radius: 50%;
-    margin-bottom: 5px;
-    opacity: 0.8;
-}
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
 
-.guest-text {
-    font-size: 42px;
-    font-weight: 100;
-    margin-bottom: 90px;
-    color: white;
-}
+        .search-input {
+            padding: 10px;
+            border: 1px solid rgba(128, 128, 128, 0.5);
+            width: 260px;
+            font-size: 16px;
+            margin-top: -90px;
+            background: #fff;
+            outline: none;
+        }
 
-.search-container {
-    display: flex;
-    align-items: center;
-}
+        .search-input:focus {
+            border-color: rgba(128, 128, 128, 0.5);
+        }
 
-.search-input {
-    padding: 10px;
-    border: 1px solid rgba(128, 128, 128, 0.5);
-    width: 260px;
-    font-size: 16px;
-    margin-top: -90px;
-    background: #fff;
-    outline: none;
-}
+        .search-button {
+            background-color: rgba(128, 128, 128, 0.3); 
+            border: 1px solid rgba(128, 128, 128, 0.5); 
+            margin-top: -90px;
+            padding: 7px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
 
-.search-input:focus {
-    border-color: rgba(128, 128, 128, 0.5);
-}
+        .search-button:hover {
+            background-color: rgba(128, 128, 128, 0.4);
+        }
 
-.search-button {
-    background-color: rgba(128, 128, 128, 0.3);
-    border: 1px solid rgba(128, 128, 128, 0.5);
-    margin-top: -90px;
-    padding: 7px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
-}
+        .search-button i {
+            font-size: 24px; 
+            color: #fff; 
+        }
 
-.search-button:hover {
-    background-color: rgba(128, 128, 128, 0.4);
-}
+        .power-off {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            z-index: 11;
+        }
 
-.search-button i {
-    font-size: 24px;
-    color: #fff;
-}
+        .power-off img {
+            width: 100%;
+            height: 100%;
+        }
 
-.power-off {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    z-index: 11;
-}
+        .password-hint {
+            margin-top: 0px;
+            color: white;
+            font-size: 15px;
+        }
 
-.power-off img {
-    width: 100%;
-    height: 100%;
-}
+        .password-hint b {
+            font-weight: bold;
+        }
 
-.password-hint {
-    margin-top: 0px;
-    color: white;
-    font-size: 15px;
-}
-
-.password-hint b {
-    font-weight: bold;
-}
-
-.hidden {
-    display: none;
-}
+        .hidden {
+            display: none;
+        }
