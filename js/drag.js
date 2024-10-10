@@ -4,8 +4,9 @@ let startX, startY;
 document.addEventListener('mousedown', (e) => {
     
     const isShortcut = e.target.closest('.shortcut');
+    const isTabBox = e.target.closest('.tab-box');
     
-    if (isShortcut) {
+    if (isShortcut || isTabBox) {
         return; 
     }
 
@@ -20,7 +21,7 @@ document.addEventListener('mousedown', (e) => {
 });
 
 document.addEventListener('mousemove', (e) => {
-    if (e.buttons === 1 && selectionBox.style.display === 'block') {
+    if (e.buttons === 1 && selectionBox.style.display === 'block') { 
         const width = Math.abs(e.pageX - startX);
         const height = Math.abs(e.pageY - startY);
 
