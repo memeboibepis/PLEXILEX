@@ -17,10 +17,10 @@ shortcutContainer.addEventListener('mousedown', (e) => {
         startX = e.pageX;
         startY = e.pageY;
 
-        selectionBox.style.left = ${startX}px;
-        selectionBox.style.top = ${startY}px;
-        selectionBox.style.width = 0px;
-        selectionBox.style.height = 0px;
+        selectionBox.style.left = startX + 'px';
+        selectionBox.style.top = startY + 'px';
+        selectionBox.style.width = '0px';
+        selectionBox.style.height = '0px';
         selectionBox.style.display = 'block'; 
     }
 });
@@ -33,10 +33,10 @@ document.addEventListener('mousemove', (e) => {
         const width = currentX - startX;
         const height = currentY - startY;
 
-        selectionBox.style.width = ${Math.abs(width)}px;
-        selectionBox.style.height = ${Math.abs(height)}px;
-        selectionBox.style.left = ${width < 0 ? currentX : startX}px;
-        selectionBox.style.top = ${height < 0 ? currentY : startY}px;
+        selectionBox.style.width = Math.abs(width) + 'px';
+        selectionBox.style.height = Math.abs(height) + 'px';
+        selectionBox.style.left = (width < 0 ? currentX : startX) + 'px';
+        selectionBox.style.top = (height < 0 ? currentY : startY) + 'px';
 
         shortcuts.forEach(shortcut => {
             const rect = shortcut.getBoundingClientRect();
@@ -55,8 +55,8 @@ document.addEventListener('mousemove', (e) => {
         const deltaX = e.clientX - startX;
         const deltaY = e.clientY - startY;
 
-        draggedShortcut.style.left = ${draggedShortcut.offsetLeft + deltaX}px;
-        draggedShortcut.style.top = ${draggedShortcut.offsetTop + deltaY}px;
+        draggedShortcut.style.left = (draggedShortcut.offsetLeft + deltaX) + 'px';
+        draggedShortcut.style.top = (draggedShortcut.offsetTop + deltaY) + 'px';
         startX = e.clientX; 
         startY = e.clientY;
     }
