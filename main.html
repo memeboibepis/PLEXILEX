@@ -231,43 +231,6 @@
     </div>
 
 <!-- Scripts -->    
-    
-    <script>
-    function fullscreenTab(tabId) {
-        const tab = document.getElementById(tabId);
-        const fullscreenIcon = tab.querySelector('.fullscreen-icon');
-
-        if (!tab.classList.contains('fullscreen')) {
-            tab.classList.add('fullscreen');
-            fullscreenIcon.classList.remove('bx-square');
-            fullscreenIcon.classList.add('bx-window');
-        } else {
-            tab.classList.remove('fullscreen');
-            fullscreenIcon.classList.remove('bx-window');
-            fullscreenIcon.classList.add('bx-square');
-        }
-    }
-
-    function minimizeTab(tabId) {
-        const tab = document.getElementById(tabId);
-        tab.style.display = 'none';
-    }
-
-    function maximizeTab(tabId) {
-        const tab = document.getElementById(tabId);
-        tab.style.display = 'block';
-        tab.classList.remove('fullscreen');
-        const fullscreenIcon = tab.querySelector('.fullscreen-icon');
-        fullscreenIcon.classList.remove('bx-window');
-        fullscreenIcon.classList.add('bx-square');
-    }
-
-    function closeTab(tabId) {
-        const tab = document.getElementById(tabId);
-        tab.remove();
-    }
-</script>
-
 <script src="/js/tabs.js"></script>
 <script src="/js/drag.js"></script>
 <script src="/js/time.js"></script>
