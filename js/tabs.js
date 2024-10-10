@@ -19,24 +19,24 @@ document.querySelectorAll('.icon-box').forEach(icon => {
 });
 
 function openTab(tab) {
-    tabs[tab].classList.add('open'); 
+    tabs[tab].classList.add('open');
     document.getElementById(tab).classList.add('active-tab');
 }
 
 function closeTab(tab) {
     tabs[tab].classList.remove('open');
-    document.getElementById(tab).classList.remove('active-tab'); 
+    document.getElementById(tab).classList.remove('active-tab');
 }
 
 function minimizeTab(tab) {
-    tabs[tab].style.height = '40px'; 
+    tabs[tab].style.height = '40px';
     tabs[tab].classList.remove('active-tab');
 }
 
 function maximizeTab(tab) {
-    tabs[tab].style.width = '100%'; 
-    tabs[tab].style.height = '100%'; 
-    tabs[tab].style.left = '0'; 
+    tabs[tab].style.width = '100%';
+    tabs[tab].style.height = '100%';
+    tabs[tab].style.left = '0';
     tabs[tab].style.top = '0';
 }
 
@@ -44,9 +44,7 @@ document.querySelectorAll('.controls i').forEach(control => {
     control.addEventListener('mousedown', (e) => {
         e.stopPropagation(); 
     });
-});
 
-document.querySelectorAll('.controls i').forEach(control => {
     control.addEventListener('click', (e) => {
         const tabId = e.target.closest('.tab-box').id;
 
@@ -65,14 +63,16 @@ document.querySelectorAll('.tab-box-header').forEach(header => {
     let startX, startY, initialX, initialY;
 
     header.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.clientX;
-        startY = e.clientY;
-        const box = header.closest('.tab-box');
-        initialX = box.offsetLeft;
-        initialY = box.offsetTop;
-        box.classList.add('dragging');
-        document.body.classList.add('dragging');
+        if (!e.target.closest('.controls')) {
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            const box = header.closest('.tab-box');
+            initialX = box.offsetLeft;
+            initialY = box.offsetTop;
+            box.classList.add('dragging');
+            document.body.classList.add('dragging');
+        }
     });
 
     document.addEventListener('mouseup', () => {
@@ -88,7 +88,7 @@ document.querySelectorAll('.tab-box-header').forEach(header => {
             const deltaX = e.clientX - startX;
             const deltaY = e.clientY - startY;
             box.style.left = initialX + deltaX + 'px';
-            box.style.top = initialY + deltaY + 'px'; 
+            box.style.top = initialY + deltaY + 'px';
         }
     });
 });
