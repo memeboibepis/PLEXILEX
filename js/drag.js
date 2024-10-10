@@ -1,10 +1,9 @@
 const selectionBox = document.getElementById('selectionBox');
 const shortcuts = document.querySelectorAll('.shortcut'); // Select all shortcut elements
 
-let startX, startY, isDragging = false;
-let isSelecting = false;  // To track if the selection box is being dragged
+let startX, startY, isDragging = false, isSelecting = false;  // Flags to track dragging and selecting
 
-// Function to check if a shortcut is within the selection box
+// Function to check if a shortcut is inside the selection box
 function isShortcutSelected(shortcut, box) {
     const boxRect = box.getBoundingClientRect();
     const shortcutRect = shortcut.getBoundingClientRect();
@@ -15,13 +14,13 @@ function isShortcutSelected(shortcut, box) {
              shortcutRect.top > boxRect.bottom);
 }
 
-// Event listener for mousedown on the container to start dragging the selection box
+// Event listener for mouse down to start selection or drag
 document.getElementById('shortcut-container').addEventListener('mousedown', (e) => {
     if (e.button === 0) { // Left mouse button
-        // If we click on a shortcut, don't show the selection box
         if (!e.target.classList.contains('shortcut')) {
+            // If we click outside of a shortcut, start dragging the selection box
+            isSelecting = true;
             isDragging = true;
-            isSelecting = true;  // We're now in selection mode
             startX = e.pageX;
             startY = e.pageY;
 
@@ -31,13 +30,16 @@ document.getElementById('shortcut-container').addEventListener('mousedown', (e) 
             selectionBox.style.height = '0px';
             selectionBox.style.display = 'block';
 
-            // Clear previously selected shortcuts
+            // Clear any previous selection
             shortcuts.forEach(shortcut => shortcut.classList.remove('selected'));
+        } else {
+            // If a shortcut is clicked, open the tab or trigger the shortcut behavior
+            isSelecting = false;
         }
     }
 });
 
-// Event listener to handle moving the selection box and detecting selection area
+// Event listener for mouse move to update selection box dimensions and detect selected shortcuts
 document.addEventListener('mousemove', (e) => {
     if (isDragging && isSelecting) {
         const currentX = e.pageX;
@@ -49,7 +51,7 @@ document.addEventListener('mousemove', (e) => {
         selectionBox.style.left = `${Math.min(currentX, startX)}px`;
         selectionBox.style.top = `${Math.min(currentY, startY)}px`;
 
-        // Check each shortcut to see if it's within the selection box
+        // Check each shortcut to see if it's inside the selection box
         shortcuts.forEach(shortcut => {
             if (isShortcutSelected(shortcut, selectionBox)) {
                 shortcut.classList.add('selected');
@@ -60,26 +62,32 @@ document.addEventListener('mousemove', (e) => {
     }
 });
 
-// Event listener for mouse up to stop the dragging process
+// Event listener for mouse up to stop dragging and hide the selection box
 document.addEventListener('mouseup', () => {
     if (isDragging) {
         isDragging = false;
-        selectionBox.style.display = 'none'; // Hide the selection box after mouse is released
-        isSelecting = false;  // Stop selection mode
+        selectionBox.style.display = 'none'; // Hide the selection box when mouse is released
     }
 });
 
-// Allow shortcuts to be clicked normally (open tab or trigger action)
+// Prevent selection box from triggering when clicking on a shortcut
 shortcuts.forEach(shortcut => {
     shortcut.addEventListener('click', (e) => {
         if (!isSelecting) {
-            // If not in selection mode, proceed with normal click behavior
-            // You can add the tab-opening or other shortcut behavior here
+            // Shortcut clicked, trigger the normal behavior
             console.log(`Shortcut ${e.target.id} clicked!`);
+            // Add your shortcut-specific action here (e.g., opening a tab)
         } else {
-            // If selection mode is active, ignore the click
+            // If the selection box is being dragged, prevent the click from triggering the shortcut action
             e.preventDefault();
             e.stopPropagation();
         }
     });
+});
+
+// Optionally, prevent default text selection behavior if any
+document.getElementById('shortcut-container').addEventListener('mousedown', (e) => {
+    if (e.target.tagName === 'DIV') {
+        e.preventDefault();
+    }
 });
