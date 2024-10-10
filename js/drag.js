@@ -1,7 +1,8 @@
 const selectionBox = document.getElementById('selectionBox');
 const shortcuts = document.querySelectorAll('.shortcut'); 
 
-let startX, startY, isDragging = false, isSelecting = false;  
+let startX, startY, isDragging = false, isSelecting = false, draggingShortcut = null;  
+
 function isShortcutSelected(shortcut, box) {
     const boxRect = box.getBoundingClientRect();
     const shortcutRect = shortcut.getBoundingClientRect();
@@ -14,10 +15,14 @@ function isShortcutSelected(shortcut, box) {
 
 document.getElementById('shortcut-container').addEventListener('mousedown', (e) => {
     if (e.button === 0) { 
-        if (!e.target.classList.contains('shortcut')) {
-           
+        const clickedShortcut = e.target.closest('.shortcut'); 
+
+        if (!clickedShortcut) {
+         
             isSelecting = true;
             isDragging = true;
+            draggingShortcut = null; 
+
             startX = e.pageX;
             startY = e.pageY;
 
@@ -31,30 +36,31 @@ document.getElementById('shortcut-container').addEventListener('mousedown', (e) 
         } else {
             
             isSelecting = false;
+            isDragging = true;
+            draggingShortcut = clickedShortcut;
 
-            const shortcutElement = e.target;
-            const rect = shortcutElement.getBoundingClientRect();
-
+            const rect = draggingShortcut.getBoundingClientRect();
             let offsetX = e.pageX - rect.left;
             let offsetY = e.pageY - rect.top;
 
             function onMouseMove(event) {
                 const x = event.pageX - offsetX;
                 const y = event.pageY - offsetY;
-                shortcutElement.style.position = 'absolute';
-                shortcutElement.style.left = `${x}px`;
-                shortcutElement.style.top = `${y}px`;
+                draggingShortcut.style.position = 'absolute';
+                draggingShortcut.style.left = `${x}px`;
+                draggingShortcut.style.top = `${y}px`;
             }
 
             function onMouseUp() {
                 document.removeEventListener('mousemove', onMouseMove);
                 document.removeEventListener('mouseup', onMouseUp);
+                draggingShortcut = null;  
             }
 
             document.addEventListener('mousemove', onMouseMove);
             document.addEventListener('mouseup', onMouseUp);
 
-            e.preventDefault();
+            e.preventDefault(); 
         }
     }
 });
@@ -81,20 +87,23 @@ document.addEventListener('mousemove', (e) => {
 });
 
 document.addEventListener('mouseup', () => {
-    if (isDragging) {
+    if (isDragging && isSelecting) {
         isDragging = false;
         selectionBox.style.display = 'none'; 
+    }
+    if (draggingShortcut) {
+        draggingShortcut = null; 
     }
 });
 
 shortcuts.forEach(shortcut => {
     shortcut.addEventListener('click', (e) => {
         if (!isSelecting) {
-            
+  
             console.log(`Shortcut ${e.target.id} clicked!`);
-       
+            
         } else {
-          
+           
             e.preventDefault();
             e.stopPropagation();
         }
