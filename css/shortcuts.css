@@ -84,9 +84,3 @@
     pointer-events: none; 
     z-index: 1000;
 }
-
-.shortcut.selected {
-    border: 1px solid #C93131; 
-    background-color: rgba(201, 49, 49, 0.3); 
-}
-
