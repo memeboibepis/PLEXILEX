@@ -7,22 +7,22 @@ let isDragging = false;
 let startX, startY, draggedShortcut;
 
 shortcutContainer.addEventListener('mousedown', (e) => {
-    if (e.button === 0) {
-        
+    if (e.button === 0) { 
         if (isDragging) {
             e.preventDefault();
             return; 
         }
 
-        if (e.target.closest('.tab-box-header')) {
-            e.preventDefault(); 
+        const targetHeader = e.target.closest('.tab-box-header');
+        if (targetHeader) {
+            e.preventDefault();
             isDragging = true; 
-            draggedShortcut = e.target.closest('.tab-box'); 
+            draggedShortcut = targetHeader.closest('.tab-box');
             startX = e.clientX;
             startY = e.clientY;
             draggedShortcut.classList.add('dragging');
         } else {
-          
+            
             isSelecting = true; 
             startX = e.pageX;
             startY = e.pageY;
@@ -37,7 +37,7 @@ shortcutContainer.addEventListener('mousedown', (e) => {
 
 document.addEventListener('mousemove', (e) => {
     if (isSelecting) {
-        
+      
         const currentX = e.pageX;
         const currentY = e.pageY;
         const width = currentX - startX;
@@ -62,7 +62,7 @@ document.addEventListener('mousemove', (e) => {
             }
         });
     } else if (isDragging && draggedShortcut) {
-        
+      
         const deltaX = e.clientX - startX;
         const deltaY = e.clientY - startY;
 
@@ -97,7 +97,7 @@ document.querySelectorAll('.tab-box-header').forEach(header => {
         if (!isSelecting) { 
             e.preventDefault();
             isDragging = true; 
-            draggedShortcut = header.closest('.tab-box'); 
+            draggedShortcut = header.closest('.tab-box');
             startX = e.clientX;
             startY = e.clientY;
             draggedShortcut.classList.add('dragging');
