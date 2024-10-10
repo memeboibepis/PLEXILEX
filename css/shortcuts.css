@@ -77,15 +77,16 @@
     cursor: grabbing; 
 }
 
-#selectionBox {
+.selection-box {
     position: absolute;
     border: 1px solid #C93131;
-    background-color: rgba(201, 49, 49, 0.3);
+    background-color: rgba(201, 49, 49, 0.3); 
+    display: none;
     pointer-events: none; 
-    z-index: 1000;
+    z-index: 9999; 
 }
 
 .shortcut.selected {
-    border: 2px solid #C93131;
+    border: 1px solid #C93131;
     background-color: rgba(201, 49, 49, 0.3); 
 }
