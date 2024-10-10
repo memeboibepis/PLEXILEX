@@ -140,6 +140,17 @@ background-color: #3e3c3c;
     border: 1px solid #333; 
 }
 
+.tab-box.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000; 
+    border-radius: 0;
+    border: none;
+}
+
 .tab-box.open {
     display: block; 
     animation: fadeInScale 0.3s ease forwards; 
