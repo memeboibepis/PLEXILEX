@@ -6,27 +6,35 @@ let isSelecting = false;
 let isDragging = false; 
 let startX, startY, draggedShortcut;
 
+// Mousedown event for both selection and dragging
 shortcutContainer.addEventListener('mousedown', (e) => {
     if (e.button === 0) { 
         startX = e.pageX;
         startY = e.pageY;
 
-        if (!e.target.closest('.shortcut')) {
-            isSelecting = true; 
+        if (e.target.closest('.shortcut')) {
+            // Start dragging
+            draggedShortcut = e.target.closest('.shortcut');
+            isDragging = true;
+            draggedShortcut.classList.add('dragging');
+            return;  // Skip selection box
+        } else {
+            // Start selection box
+            isSelecting = true;
             selectionBox.style.left = `${startX}px`;
             selectionBox.style.top = `${startY}px`;
             selectionBox.style.width = `0px`;
             selectionBox.style.height = `0px`;
-            selectionBox.style.display = 'block'; 
+            selectionBox.style.display = 'block';
         }
     }
 });
 
 document.addEventListener('mousemove', (e) => {
     if (isSelecting) {
+        // Selection logic
         const currentX = e.pageX;
         const currentY = e.pageY;
-
         const width = currentX - startX;
         const height = currentY - startY;
 
@@ -35,6 +43,7 @@ document.addEventListener('mousemove', (e) => {
         selectionBox.style.left = `${width < 0 ? currentX : startX}px`;
         selectionBox.style.top = `${height < 0 ? currentY : startY}px`;
 
+        // Highlight shortcuts within selection box
         shortcuts.forEach(shortcut => {
             const rect = shortcut.getBoundingClientRect();
             const selectionRect = selectionBox.getBoundingClientRect();
@@ -43,12 +52,13 @@ document.addEventListener('mousemove', (e) => {
                 rect.right > selectionRect.left &&
                 rect.top < selectionRect.bottom &&
                 rect.bottom > selectionRect.top) {
-                shortcut.classList.add('selected'); 
+                shortcut.classList.add('selected'); // Add selected class
             } else {
-                shortcut.classList.remove('selected'); 
+                shortcut.classList.remove('selected'); // Remove selected class
             }
         });
     } else if (isDragging && draggedShortcut) {
+        // Dragging logic
         const deltaX = e.clientX - startX;
         const deltaY = e.clientY - startY;
 
@@ -56,31 +66,23 @@ document.addEventListener('mousemove', (e) => {
     }
 });
 
-document.addEventListener('mouseup', () => {
+document.addEventListener('mouseup', (e) => {
     if (isSelecting) {
+        // Stop selecting
         isSelecting = false;
-        selectionBox.style.display = 'none'; 
+        selectionBox.style.display = 'none'; // Hide selection box
 
+        // Clear selected class after selection is done
         shortcuts.forEach(shortcut => {
-            shortcut.classList.remove('selected'); 
+            shortcut.classList.remove('selected');
         });
     }
 
     if (isDragging && draggedShortcut) {
-        isDragging = false; 
+        // Stop dragging
+        isDragging = false;
         draggedShortcut.classList.remove('dragging');
-        draggedShortcut.style.transform = ''; 
-        draggedShortcut = null; 
+        draggedShortcut.style.transform = ''; // Reset position
+        draggedShortcut = null; // Clear reference
     }
-});
-
-shortcuts.forEach(shortcut => {
-    shortcut.addEventListener('mousedown', (e) => {
-        e.preventDefault(); 
-        isDragging = true; 
-        draggedShortcut = e.currentTarget;
-        startX = e.clientX;
-        startY = e.clientY;
-        draggedShortcut.classList.add('dragging');
-    });
 });
