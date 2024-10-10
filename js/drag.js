@@ -1,104 +1,133 @@
 const container = document.getElementById('shortcut-container');
-let draggingShortcut = null;
+const selectionBox = document.getElementById('selectionBox');
+const shortcuts = document.querySelectorAll('.shortcut');
 
-// Ensure shortcuts are positioned in a grid and dragged correctly
-document.querySelectorAll('.shortcut').forEach(shortcut => {
-    shortcut.addEventListener('dragstart', (e) => {
-        draggingShortcut = shortcut;
-        shortcut.classList.add('dragging');
-        setTimeout(() => {
-            shortcut.style.display = 'none'; 
-        }, 0);
-    });
+let startX, startY, isDragging = false, isSelecting = false, draggingShortcut = null;
 
-    shortcut.addEventListener('dragend', () => {
-        shortcut.classList.remove('dragging');
-        setTimeout(() => {
-            shortcut.style.display = 'flex';
-            draggingShortcut = null;
-        }, 0);
-    });
-});
+// Function to check if a shortcut is inside the selection box
+function isShortcutSelected(shortcut, box) {
+    const boxRect = box.getBoundingClientRect();
+    const shortcutRect = shortcut.getBoundingClientRect();
+    return !(shortcutRect.right < boxRect.left || 
+             shortcutRect.left > boxRect.right || 
+             shortcutRect.bottom < boxRect.top || 
+             shortcutRect.top > boxRect.bottom);
+}
 
-// Prevent default behavior to allow for drop
-container.addEventListener('dragover', (e) => {
-    e.preventDefault(); 
-});
+// Event listener for mouse down to start selection or drag
+container.addEventListener('mousedown', (e) => {
+    if (e.button === 0) { // Left mouse button
+        const clickedShortcut = e.target.closest('.shortcut');  // Find the clicked shortcut, if any
 
-container.addEventListener('drop', (e) => {
-    e.preventDefault(); 
-    if (draggingShortcut) {
-        const { clientX, clientY } = e;
+        if (!clickedShortcut) {
+            // If we clicked outside of a shortcut, start selecting (dragging the selection box)
+            isSelecting = true;
+            isDragging = true;
+            draggingShortcut = null;  // Ensure no shortcut is being dragged
 
-        const shortcutSize = 80;  // Assuming the grid is 90px
+            startX = e.pageX;
+            startY = e.pageY;
 
-        // Get the new X and Y coordinates aligned to the grid
-        const newX = Math.floor(clientX / shortcutSize) * shortcutSize; 
-        const newY = Math.floor(clientY / shortcutSize) * shortcutSize; 
+            selectionBox.style.left = `${startX}px`;
+            selectionBox.style.top = `${startY}px`;
+            selectionBox.style.width = '0px';
+            selectionBox.style.height = '0px';
+            selectionBox.style.display = 'block';
 
-        // Ensure shortcuts do not overlap
-        const existingShortcuts = Array.from(container.children).filter(child => child !== draggingShortcut);
-        const overlapping = existingShortcuts.some(existing => {
-            const rect = existing.getBoundingClientRect();
-            return (
-                newX < rect.right &&
-                newX + shortcutSize > rect.left &&
-                newY < rect.bottom &&
-                newY + shortcutSize > rect.top
-            );
-        });
+            // Clear any previous selection
+            shortcuts.forEach(shortcut => shortcut.classList.remove('selected'));
+        } else {
+            // If a shortcut is clicked, mark it as being dragged
+            isSelecting = false;
+            isDragging = true;
+            draggingShortcut = clickedShortcut;  // Store the dragged shortcut
 
-        // If not overlapping, update position
-        if (!overlapping) {
-            draggingShortcut.style.position = 'absolute'; 
-            draggingShortcut.style.left = `${newX}px`; 
-            draggingShortcut.style.top = `${newY}px`; 
+            const rect = draggingShortcut.getBoundingClientRect();
+            let offsetX = e.pageX - rect.left;
+            let offsetY = e.pageY - rect.top;
 
-            container.appendChild(draggingShortcut);  // Update container
+            // Move the shortcut with mouse drag
+            function onMouseMove(event) {
+                const x = event.pageX - offsetX;
+                const y = event.pageY - offsetY;
 
-            saveShortcutsOrder(); // Save new order
+                // Clamp the shortcut within the bounds of the container
+                const containerRect = container.getBoundingClientRect();
+                const maxX = containerRect.width - rect.width;
+                const maxY = containerRect.height - rect.height;
+
+                draggingShortcut.style.position = 'absolute';
+                draggingShortcut.style.left = `${Math.max(0, Math.min(x, maxX))}px`;
+                draggingShortcut.style.top = `${Math.max(0, Math.min(y, maxY))}px`;
+            }
+
+            // Stop dragging when mouse is released
+            function onMouseUp() {
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+                draggingShortcut = null;  // Reset dragging when mouse is up
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+
+            e.preventDefault(); // Prevent default behavior (selection box)
         }
     }
 });
 
-// Function to save the shortcuts' positions in localStorage
-function saveShortcutsOrder() {
-    const shortcuts = Array.from(container.children).map(shortcut => {
-        return {
-            id: shortcut.id,
-            left: shortcut.style.left,
-            top: shortcut.style.top
-        };
-    });
-    localStorage.setItem('shortcutOrder', JSON.stringify(shortcuts)); 
-}
+// Event listener for mouse move to update selection box dimensions and detect selected shortcuts
+document.addEventListener('mousemove', (e) => {
+    if (isDragging && isSelecting) {
+        const currentX = e.pageX;
+        const currentY = e.pageY;
 
-// Function to load saved shortcut positions on page load
-function loadShortcutsOrder() {
-    const savedShortcuts = JSON.parse(localStorage.getItem('shortcutOrder'));
-    if (savedShortcuts) {
-        savedShortcuts.forEach(data => {
-            const shortcut = document.getElementById(data.id);
-            if (shortcut) {
-                shortcut.style.position = 'absolute';
-                shortcut.style.left = data.left;
-                shortcut.style.top = data.top;
-                container.appendChild(shortcut);  // Append to container
+        selectionBox.style.width = `${Math.abs(currentX - startX)}px`;
+        selectionBox.style.height = `${Math.abs(currentY - startY)}px`;
+
+        selectionBox.style.left = `${Math.min(currentX, startX)}px`;
+        selectionBox.style.top = `${Math.min(currentY, startY)}px`;
+
+        // Check each shortcut to see if it's inside the selection box
+        shortcuts.forEach(shortcut => {
+            if (isShortcutSelected(shortcut, selectionBox)) {
+                shortcut.classList.add('selected');
+            } else {
+                shortcut.classList.remove('selected');
             }
         });
     }
-}
+});
 
-// Load positions when the page is loaded
-window.onload = loadShortcutsOrder;
+// Event listener for mouse up to stop dragging and hide the selection box
+document.addEventListener('mouseup', () => {
+    if (isDragging && isSelecting) {
+        isDragging = false;
+        selectionBox.style.display = 'none'; // Hide the selection box when mouse is released
+    }
+    if (draggingShortcut) {
+        draggingShortcut = null; // Reset the dragging flag
+    }
+});
 
-// Ensure click events don't open shortcuts while dragging
-document.querySelectorAll('.shortcut').forEach(shortcut => {
+// Prevent selection box from triggering when clicking on a shortcut
+shortcuts.forEach(shortcut => {
     shortcut.addEventListener('click', (e) => {
-        // Prevent the click from opening the shortcut if it's being dragged
-        if (draggingShortcut) {
+        if (!isSelecting) {
+            // Shortcut clicked, trigger the normal behavior
+            console.log(`Shortcut ${e.target.id} clicked!`);
+            // Add your shortcut-specific action here (e.g., opening a tab)
+        } else {
+            // If the selection box is being dragged, prevent the click from triggering the shortcut action
             e.preventDefault();
             e.stopPropagation();
         }
     });
+});
+
+// Optionally, prevent default text selection behavior if any
+container.addEventListener('mousedown', (e) => {
+    if (e.target.tagName === 'DIV') {
+        e.preventDefault();
+    }
 });
