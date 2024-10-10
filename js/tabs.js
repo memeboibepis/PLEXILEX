@@ -11,7 +11,6 @@ const tabs = {
     roblox: document.getElementById('roblox-tab'),
 };
 
-// Handle tab icon click (for opening tabs)
 document.querySelectorAll('.icon-box').forEach(icon => {
     icon.addEventListener('click', (e) => {
         const targetId = e.target.closest('.icon-box').id;
@@ -19,47 +18,36 @@ document.querySelectorAll('.icon-box').forEach(icon => {
     });
 });
 
-// Open tab functionality
 function openTab(tab) {
-    tabs[tab].classList.add('open');
+    tabs[tab].classList.add('open'); 
     document.getElementById(tab).classList.add('active-tab');
-    makeDraggable(tabs[tab]);
+    makeDraggable(tabs[tab]);  
 }
 
-// Close tab functionality
 function closeTab(tab) {
     tabs[tab].classList.remove('open');
-    document.getElementById(tab).classList.remove('active-tab');
+    document.getElementById(tab).classList.remove('active-tab'); 
 }
 
-// Minimize tab functionality
 function minimizeTab(tab) {
-    tabs[tab].style.height = '40px'; // Minimized height
-    tabs[tab].classList.remove('active-tab'); // Optionally remove active-tab class when minimized
+    tabs[tab].style.height = '40px'; 
+    tabs[tab].classList.remove('active-tab');
 }
 
-// Maximize tab functionality
 function maximizeTab(tab) {
-    if (tabs[tab].style.height === '100%' && tabs[tab].style.width === '100%') {
-        // If already maximized, restore original size
-        tabs[tab].style.width = ''; 
-        tabs[tab].style.height = ''; 
-        tabs[tab].style.left = ''; 
-        tabs[tab].style.top = '';
-    } else {
-        // Maximize to full screen
-        tabs[tab].style.width = '100%';
-        tabs[tab].style.height = '100%';
-        tabs[tab].style.left = '0';
-        tabs[tab].style.top = '0';
-    }
+    tabs[tab].style.width = '100%'; 
+    tabs[tab].style.height = '100%'; 
+    tabs[tab].style.left = '0'; 
+    tabs[tab].style.top = '0';
 }
 
-// Add event listeners to the control buttons (Close, Minimize, Maximize)
 document.querySelectorAll('.controls i').forEach(control => {
     control.addEventListener('mousedown', (e) => {
-        e.stopPropagation();
+        e.stopPropagation(); 
     });
+});
+
+document.querySelectorAll('.controls i').forEach(control => {
     control.addEventListener('click', (e) => {
         const tabId = e.target.closest('.tab-box').id;
 
@@ -73,13 +61,11 @@ document.querySelectorAll('.controls i').forEach(control => {
     });
 });
 
-// Function for making tabs draggable
 function makeDraggable(element) {
     const header = element.querySelector('.tab-box-header');
     let isDragging = false;
     let startX, startY, initialX, initialY;
 
-    // Start dragging the tab
     header.addEventListener('mousedown', (e) => {
         isDragging = true;
         startX = e.clientX;
@@ -91,28 +77,23 @@ function makeDraggable(element) {
         document.body.classList.add('dragging');
     });
 
-    // Stop dragging the tab
     document.addEventListener('mouseup', () => {
-        if (isDragging) {
-            const box = header.closest('.tab-box');
-            box.classList.remove('dragging');
-            document.body.classList.remove('dragging');
-            isDragging = false;
-        }
+        isDragging = false;
+        const box = header.closest('.tab-box');
+        box.classList.remove('dragging');
+        document.body.classList.remove('dragging');
     });
 
-    // Handle dragging movement
     document.addEventListener('mousemove', (e) => {
         if (isDragging) {
             const box = header.closest('.tab-box');
             const deltaX = e.clientX - startX;
             const deltaY = e.clientY - startY;
             box.style.left = initialX + deltaX + 'px';
-            box.style.top = initialY + deltaY + 'px';
+            box.style.top = initialY + deltaY + 'px'; 
         }
     });
 
-    // For touch events (for mobile support)
     header.addEventListener('touchstart', (e) => {
         isDragging = true;
         startX = e.touches[0].clientX;
@@ -125,12 +106,10 @@ function makeDraggable(element) {
     });
 
     document.addEventListener('touchend', () => {
-        if (isDragging) {
-            const box = header.closest('.tab-box');
-            box.classList.remove('dragging');
-            document.body.classList.remove('dragging');
-            isDragging = false;
-        }
+        isDragging = false;
+        const box = header.closest('.tab-box');
+        box.classList.remove('dragging');
+        document.body.classList.remove('dragging');
     });
 
     document.addEventListener('touchmove', (e) => {
