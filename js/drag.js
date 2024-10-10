@@ -13,40 +13,30 @@ shortcutContainer.addEventListener('mousedown', (e) => {
             return; 
         }
 
-        const targetHeader = e.target.closest('.tab-box-header');
-        if (targetHeader) {
-            e.preventDefault();
-            isDragging = true; 
-            draggedShortcut = targetHeader.closest('.tab-box');
-            startX = e.clientX;
-            startY = e.clientY;
-            draggedShortcut.classList.add('dragging');
-        } else {
-            
-            isSelecting = true; 
-            startX = e.pageX;
-            startY = e.pageY;
-            selectionBox.style.left = `${startX}px`;
-            selectionBox.style.top = `${startY}px`;
-            selectionBox.style.width = `0px`;
-            selectionBox.style.height = `0px`;
-            selectionBox.style.display = 'block'; 
-        }
+        isSelecting = true; 
+        startX = e.pageX;
+        startY = e.pageY;
+
+        selectionBox.style.left = ${startX}px;
+        selectionBox.style.top = ${startY}px;
+        selectionBox.style.width = 0px;
+        selectionBox.style.height = 0px;
+        selectionBox.style.display = 'block'; 
     }
 });
 
 document.addEventListener('mousemove', (e) => {
     if (isSelecting) {
-      
         const currentX = e.pageX;
         const currentY = e.pageY;
+
         const width = currentX - startX;
         const height = currentY - startY;
 
-        selectionBox.style.width = `${Math.abs(width)}px`;
-        selectionBox.style.height = `${Math.abs(height)}px`;
-        selectionBox.style.left = `${width < 0 ? currentX : startX}px`;
-        selectionBox.style.top = `${height < 0 ? currentY : startY}px`;
+        selectionBox.style.width = ${Math.abs(width)}px;
+        selectionBox.style.height = ${Math.abs(height)}px;
+        selectionBox.style.left = ${width < 0 ? currentX : startX}px;
+        selectionBox.style.top = ${height < 0 ? currentY : startY}px;
 
         shortcuts.forEach(shortcut => {
             const rect = shortcut.getBoundingClientRect();
@@ -62,20 +52,18 @@ document.addEventListener('mousemove', (e) => {
             }
         });
     } else if (isDragging && draggedShortcut) {
-      
         const deltaX = e.clientX - startX;
         const deltaY = e.clientY - startY;
 
-        draggedShortcut.style.left = `${draggedShortcut.offsetLeft + deltaX}px`;
-        draggedShortcut.style.top = `${draggedShortcut.offsetTop + deltaY}px`;
-        startX = e.clientX;
+        draggedShortcut.style.left = ${draggedShortcut.offsetLeft + deltaX}px;
+        draggedShortcut.style.top = ${draggedShortcut.offsetTop + deltaY}px;
+        startX = e.clientX; 
         startY = e.clientY;
     }
 });
 
 document.addEventListener('mouseup', () => {
     if (isSelecting) {
-        
         isSelecting = false;
         selectionBox.style.display = 'none'; 
 
@@ -85,7 +73,6 @@ document.addEventListener('mouseup', () => {
     }
 
     if (isDragging && draggedShortcut) {
-        
         isDragging = false; 
         draggedShortcut.classList.remove('dragging');
         draggedShortcut = null; 
@@ -97,7 +84,8 @@ document.querySelectorAll('.tab-box-header').forEach(header => {
         if (!isSelecting) { 
             e.preventDefault();
             isDragging = true; 
-            draggedShortcut = header.closest('.tab-box');
+
+            draggedShortcut = header.closest('.tab-box'); 
             startX = e.clientX;
             startY = e.clientY;
             draggedShortcut.classList.add('dragging');
