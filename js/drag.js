@@ -13,15 +13,17 @@ shortcutContainer.addEventListener('mousedown', (e) => {
             return; 
         }
 
-        isSelecting = true; 
-        startX = e.pageX;
-        startY = e.pageY;
+        if (!isDragging) {
+            isSelecting = true; 
+            startX = e.pageX;
+            startY = e.pageY;
 
-        selectionBox.style.left = `${startX}px`;
-        selectionBox.style.top = `${startY}px`;
-        selectionBox.style.width = `0px`;
-        selectionBox.style.height = `0px`;
-        selectionBox.style.display = 'block'; 
+            selectionBox.style.left = `${startX}px`;
+            selectionBox.style.top = `${startY}px`;
+            selectionBox.style.width = `0px`;
+            selectionBox.style.height = `0px`;
+            selectionBox.style.display = 'block'; 
+        }
     }
 });
 
@@ -68,7 +70,7 @@ document.addEventListener('mouseup', () => {
         selectionBox.style.display = 'none'; 
 
         shortcuts.forEach(shortcut => {
-            shortcut.style.borderColor = 'transparent'; 
+            shortcut.style.borderColor = 'transparent';
         });
     }
 
@@ -81,7 +83,7 @@ document.addEventListener('mouseup', () => {
 
 document.querySelectorAll('.tab-box-header').forEach(header => {
     header.addEventListener('mousedown', (e) => {
-        if (!isSelecting) { 
+        if (!isSelecting) {
             e.preventDefault();
             isDragging = true; 
 
@@ -91,4 +93,11 @@ document.querySelectorAll('.tab-box-header').forEach(header => {
             draggedShortcut.classList.add('dragging');
         }
     });
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+        isSelecting = false; 
+        selectionBox.style.display = 'none'; 
+    }
 });
