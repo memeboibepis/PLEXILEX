@@ -21,6 +21,7 @@ document.querySelectorAll('.icon-box').forEach(icon => {
 function openTab(tab) {
     tabs[tab].classList.add('open'); 
     document.getElementById(tab).classList.add('active-tab');
+    makeDraggable(tabs[tab]);  
 }
 
 function closeTab(tab) {
@@ -60,7 +61,8 @@ document.querySelectorAll('.controls i').forEach(control => {
     });
 });
 
-document.querySelectorAll('.tab-box-header').forEach(header => {
+function makeDraggable(element) {
+    const header = element.querySelector('.tab-box-header');
     let isDragging = false;
     let startX, startY, initialX, initialY;
 
@@ -91,4 +93,32 @@ document.querySelectorAll('.tab-box-header').forEach(header => {
             box.style.top = initialY + deltaY + 'px'; 
         }
     });
-});
+
+    header.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        const box = header.closest('.tab-box');
+        initialX = box.offsetLeft;
+        initialY = box.offsetTop;
+        box.classList.add('dragging');
+        document.body.classList.add('dragging');
+    });
+
+    document.addEventListener('touchend', () => {
+        isDragging = false;
+        const box = header.closest('.tab-box');
+        box.classList.remove('dragging');
+        document.body.classList.remove('dragging');
+    });
+
+    document.addEventListener('touchmove', (e) => {
+        if (isDragging) {
+            const box = header.closest('.tab-box');
+            const deltaX = e.touches[0].clientX - startX;
+            const deltaY = e.touches[0].clientY - startY;
+            box.style.left = initialX + deltaX + 'px';
+            box.style.top = initialY + deltaY + 'px';
+        }
+    });
+}
