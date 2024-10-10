@@ -1,7 +1,6 @@
 const selectionBox = document.getElementById('selectionBox');
 const shortcuts = document.querySelectorAll('.shortcut'); // Select all shortcut elements
 
-const gridSize = 100;  // Define the size of the grid cells (you can adjust this value)
 let startX, startY, isDragging = false, isSelecting = false, draggingShortcut = null;  // Flags for dragging and selecting
 
 // Function to check if a shortcut is inside the selection box
@@ -13,6 +12,24 @@ function isShortcutSelected(shortcut, box) {
              shortcutRect.left > boxRect.right || 
              shortcutRect.bottom < boxRect.top || 
              shortcutRect.top > boxRect.bottom);
+}
+
+// Function to keep a shortcut within the grid constraints
+function constrainToGrid(x, y) {
+    const container = document.getElementById('shortcut-container');
+    const containerRect = container.getBoundingClientRect();
+
+    const gridSize = 100; // Adjust according to your grid size
+
+    // Calculate the closest grid position
+    const gridX = Math.round((x - containerRect.left) / gridSize) * gridSize;
+    const gridY = Math.round((y - containerRect.top) / gridSize) * gridSize;
+
+    // Constrain the position within the container bounds
+    const constrainedX = Math.min(Math.max(gridX, 0), containerRect.width - gridSize);
+    const constrainedY = Math.min(Math.max(gridY, 0), containerRect.height - gridSize);
+
+    return { x: constrainedX, y: constrainedY };
 }
 
 // Event listener for mouse down to start selection or drag
@@ -52,23 +69,25 @@ document.getElementById('shortcut-container').addEventListener('mousedown', (e) 
                 const x = event.pageX - offsetX;
                 const y = event.pageY - offsetY;
 
-                // Snap to the grid (you can modify the gridSize as needed)
-                const snapX = Math.round(x / gridSize) * gridSize;
-                const snapY = Math.round(y / gridSize) * gridSize;
-
+                // Constrain the shortcut to the grid
+                const constrainedPosition = constrainToGrid(x, y);
                 draggingShortcut.style.position = 'absolute';
-                draggingShortcut.style.left = `${snapX}px`;
-                draggingShortcut.style.top = `${snapY}px`;
+                draggingShortcut.style.left = `${constrainedPosition.x}px`;
+                draggingShortcut.style.top = `${constrainedPosition.y}px`;
             }
 
             // Stop dragging when mouse is released
-            function onMouseUp() {
+            function onMouseUp(event) {
                 document.removeEventListener('mousemove', onMouseMove);
                 document.removeEventListener('mouseup', onMouseUp);
 
-                // After placing, ensure we don't open it.
-                draggingShortcut.classList.remove('dragging');
-                draggingShortcut = null;  // Reset dragging flag
+                // Constrain the shortcut to grid on release
+                const finalPosition = constrainToGrid(event.pageX - offsetX, event.pageY - offsetY);
+                draggingShortcut.style.left = `${finalPosition.x}px`;
+                draggingShortcut.style.top = `${finalPosition.y}px`;
+
+                draggingShortcut.style.position = 'static'; // Reset position after drag
+                draggingShortcut = null;  // Reset dragging when mouse is up
             }
 
             document.addEventListener('mousemove', onMouseMove);
@@ -113,13 +132,13 @@ document.addEventListener('mouseup', () => {
     }
 });
 
-// Prevent the selection box from being triggered when clicking on a shortcut
+// Prevent selection box from triggering when clicking on a shortcut
 shortcuts.forEach(shortcut => {
-    shortcut.addEventListener('mousedown', (e) => {
+    shortcut.addEventListener('click', (e) => {
         if (!isSelecting) {
-            // Shortcut clicked, trigger the normal behavior (open the tab or shortcut)
+            // Shortcut clicked, trigger the normal behavior
             console.log(`Shortcut ${e.target.id} clicked!`);
-            // Here you can add your shortcut opening logic
+            // Add your shortcut-specific action here (e.g., opening a tab)
         } else {
             // If the selection box is being dragged, prevent the click from triggering the shortcut action
             e.preventDefault();
@@ -128,9 +147,9 @@ shortcuts.forEach(shortcut => {
     });
 });
 
-// Function to stop selection box when dragging is complete
-function stopDrag() {
-    isDragging = false;
-    isSelecting = false;
-    selectionBox.style.display = 'none';
-}
+// Optionally, prevent default text selection behavior if any
+document.getElementById('shortcut-container').addEventListener('mousedown', (e) => {
+    if (e.target.tagName === 'DIV') {
+        e.preventDefault();
+    }
+});
