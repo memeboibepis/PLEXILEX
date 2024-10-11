@@ -1,10 +1,11 @@
- function updateTime() {
-        const now = new Date();
-        document.getElementById('time').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
-        document.getElementById('date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-    }
-    setInterval(updateTime, 1000);
-    updateTime();
+function updateTime() {
+    const now = new Date();
+   
+    document.getElementById('time').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+    document.getElementById('date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+}
+setInterval(updateTime, 1000);
+updateTime();
 
     document.body.addEventListener('click', () => {
         const loginContainer = document.getElementById('loginContainer');
